@@ -11,10 +11,9 @@
 -- Criar um sistema continuo.
 */
 
-//obs: colocar pausa de segurança no fim de cada ação para que o ususario veja as informações, antes de iniciar novamente o menu.
 
 #include <stdio.h>
-#include "actions.h"
+#include "system-actions.h"
 
 void main() {
     int acao;
@@ -33,38 +32,46 @@ void main() {
 
         printf("system log: Por favor digite o indice da operação que deseja realizar: ");
         scanf("%d", &acao);
+        getchar();
 
         if (acao == 01 || acao == 1) {
             printf("\n---------- Ação de Cadastro! ----------\n");
             printf("system log: preencha os campos necessarios para o cadastro...\n");
             //chamar procedimento createEmployee();
+            getchar();
         }
         else if (acao == 02 || acao == 2) {
             printf("\n---------- Ação de Atualização! ----------\n");
             printf("system log: preencha os campos necessarios para a atualização dos dados do funcionario...\n");
             //chamar procedimento udateEmployee();
+            getchar();
         }
         else if (acao == 03 || acao == 3) {
             printf("\n---------- Ação de Busca! ----------\n");
             printf("system log: preencha os campos necessarios para a busca de funcionarios...\n");
             //chamar procedimento fetchEmployee();
+            getchar();
         }
         else if (acao == 04 || acao == 4) {
             printf("\n---------- Ação de Leitura! ----------\n\n");
             //chamar procedimento readEmployee();
             printf("system log: leitura completa.\n");
+            getchar();
         }
         else if (acao == 05 || acao == 5) {
             printf("\n---------- Ação de Remoção! ----------\n");
             printf("system log: preencha os campos necessarios para a remoção...\n");
             //chamar procedimento deleteEmployee();
+            getchar();
         }
         else if (acao == 06 || acao == 6) {
             break;
         }
         else {
             printf("\nsystem log: Informe uma ação valida!\n\n");
+            getchar();
         }
     }
     printf("\nsystem log: Sistema Encerrado! \n");
+    getchar();
 }

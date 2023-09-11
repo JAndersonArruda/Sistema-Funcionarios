@@ -14,6 +14,7 @@
 //obs: colocar pausa de segurança no fim de cada ação para que o ususario veja as informações, antes de iniciar novamente o menu.
 
 #include <stdio.h>
+#include "actions.h"
 
 void main() {
     int acao;

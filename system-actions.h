@@ -43,7 +43,7 @@ int menu() {
 void createEmployee(Funcionario funcionarios[3], int idx, char name[50], int age, char cpf[15], char address[100], float salary) {
 	//Seguest�o de mudan�a ---
     Funcionario *funcionario = (Funcionario *)malloc(sizeof(Funcionario));
-    
+
     strcpy(funcionario->nome, name);
     funcionario->idade = age;
     strcpy(funcionario->cpf, cpf);
@@ -80,4 +80,19 @@ void readEmployee(char fileName[50]){
 		//Encerrando execu��o do arquivo
 		fclose(file);
 	}	
+}
+
+void writeFile(Funcionario funcionarios[3] , char nome[25]) {
+    FILE *file = openFIle(nome, "w");
+
+    for (int c = 0; c < 3; c++){
+        fprintf(file, "%s, %d, %s, %s, %.2f\n",
+                funcionarios[c].nome,
+                funcionarios[c].idade,
+                funcionarios[c].cpf,
+                funcionarios[c].endereco,
+                funcionarios[c].salario);
+    }
+
+    closeFile(file);
 }

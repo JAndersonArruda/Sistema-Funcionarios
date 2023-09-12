@@ -40,17 +40,18 @@ int menu() {
     return acao;
 }
 
-Funcionario createEmployee(char nome[50], int idade, char cpf[15], char endereco[100], float salario) {
+void createEmployee(Funcionario funcionarios[3], int idx, char name[50], int age, char cpf[15], char address[100], float salary) {
 	//Seguest�o de mudan�a ---
     Funcionario *funcionario = (Funcionario *)malloc(sizeof(Funcionario));
-    funcionario->id = 1;
-    strcpy(funcionario->nome, nome);
-    funcionario->idade = idade;
+    
+    strcpy(funcionario->nome, name);
+    funcionario->idade = age;
     strcpy(funcionario->cpf, cpf);
-    strcpy(funcionario->endereco, endereco);
-    funcionario->salario = salario;
+    strcpy(funcionario->endereco, address);
+    funcionario->salario = salary;
 
-    return *funcionario;
+    printf("Index: %d", idx);
+    funcionarios[idx] = *funcionario;
 }
 
 //Recebe o nome do arquivo desejado (caso esteja em pasta diferente, enviar o caminho do arquivo)

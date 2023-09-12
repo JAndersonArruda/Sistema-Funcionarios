@@ -16,7 +16,7 @@ typedef struct {
 int menu() {
     int acao;
     
-    printf("\n\t------------ Menu ------------- \n\n");
+    printf("\n\t------------ Menu ------------ \n\n");
     printf("\t   [1] Cadastrar...\n");
     printf("\t   [2] Atualizar...\n");
     printf("\t   [3] Buscar...\n");
@@ -32,7 +32,7 @@ int menu() {
 }
 
 Funcionario createEmployee(char nome[50], int idade, char cpf[15], char endereco[100], float salario) {
-	//Seguestão de mudança ---
+	//Seguestï¿½o de mudanï¿½a ---
     Funcionario *funcionario = (Funcionario *)malloc(sizeof(Funcionario));
     funcionario->id = 1;
     strcpy(funcionario->nome, nome);
@@ -49,19 +49,17 @@ void readEmployee(char fileName[50]){
 	
 	FILE* file = fopen(fileName, "r");
 	if (!file){
-		printf ("Impossível abrir arquivo");
+		printf ("Impossï¿½vel abrir arquivo");
 	}
 	else{
-		
-		//String responsável por armazenar os valores do documento
+		//String responsï¿½vel por armazenar os valores do documento
 		char buffer[1024];	
-		
-		//Enquanto o documento não estiver nulo
+		//Enquanto o documento nï¿½o estiver nulo
 		while(fgets(buffer, 1024, file)){
-			
-			//Definindo a separação quando uma vírgula for identificads
+
+			//Definindo a separaï¿½ï¿½o quando uma vï¿½rgula for identificada
 			char * value = strtok(buffer, ", ");			
-			//Enquanto aquela linha não for nula, percorra
+			//Enquanto aquela linha nï¿½o for nula, percorra
 			while(value){
 				printf("%s  ", value);
                 value = strtok(NULL, ", ");
@@ -69,7 +67,7 @@ void readEmployee(char fileName[50]){
 			//Qubrando entre uma linha e outra
 			printf("\n");
 		}
-		//Encerrando execução do arquivo
+		//Encerrando execuï¿½ï¿½o do arquivo
 		fclose(file);
 	}	
 }

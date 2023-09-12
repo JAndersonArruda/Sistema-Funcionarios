@@ -21,17 +21,17 @@ void main() {
     while (1) {
         printf("\n ---------- Sistema de Funcionarios ---------- \n\n");
 
-        printf("\n\t------------ Menu ------------- \n\n");
-        printf("\t   01. Cadastrar...\n");
-        printf("\t   02. Atualizar...\n");
-        printf("\t   03. Buscar...\n");
-        printf("\t   04. Ler...\n");
-        printf("\t   05. Remover...\n");
-        printf("\t   06. Encerrar sessão...\n\n");
-        printf("\t------------------------------- \n\n");
-
-        printf("system log: Por favor digite o indice da operação que deseja realizar: ");
-        scanf("%d", &acao);
+        int acao = menu();
+        // printf("\n\t------------ Menu ------------- \n\n");
+        // printf("\t   01. Cadastrar...\n");
+        // printf("\t   02. Atualizar...\n");
+        // printf("\t   03. Buscar...\n");
+        // printf("\t   04. Ler...\n");
+        // printf("\t   05. Remover...\n");
+        // printf("\t   06. Encerrar sessão...\n\n");
+        // printf("\t------------------------------- \n\n");
+        // printf("system log: Por favor digite o indice da operação que deseja realizar: ");
+        // scanf("%d", &acao);
         getchar();
 
         if (acao == 01 || acao == 1) {

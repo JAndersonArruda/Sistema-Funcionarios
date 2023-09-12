@@ -40,9 +40,12 @@ void main() {
 
                 if (idxFuncionario < 3) {
                     createEmployee(&funcionarios, idxFuncionario, nome, idade, cpf, endereco, salario);
-                    idxFuncionario++;
-                } else {
+                    
+                    if (idxFuncionario == 2) {
                     writeFile(funcionarios, "funcionarios.csv");
+                    }
+
+                    idxFuncionario++;
                 }
                 break;
             case 2:

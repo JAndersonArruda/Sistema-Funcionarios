@@ -18,6 +18,10 @@ FILE *openFIle(char nome[25], char mode[5]) {
     return file;
 }
 
+void closeFile(FILE *file) {
+    fclose(file);
+}
+
 int menu() {
     int acao;
     

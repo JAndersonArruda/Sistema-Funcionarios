@@ -30,3 +30,15 @@ int menu() {
 
     return acao;
 }
+
+Funcionario createEmployee(char nome[50], int idade, char cpf[15], char endereco[100], float salario) {
+    Funcionario *funcionario = malloc(sizeof(Funcionario));
+    funcionario->id = 1;
+    strcpy(funcionario->nome, nome);
+    funcionario->idade = idade;
+    strcpy(funcionario->cpf, cpf);
+    strcpy(funcionario->endereco, endereco);
+    funcionario->salario = salario;
+
+    return *funcionario;
+}

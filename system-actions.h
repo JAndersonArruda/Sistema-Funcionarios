@@ -11,6 +11,12 @@ typedef struct {
     float salario;
 } Funcionario;
 
+FILE *openFIle(char nome[25], char mode[5]) {
+    FILE *file;
+    file = fopen(nome, mode);
+
+    return file;
+}
 
 int menu() {
     int acao;

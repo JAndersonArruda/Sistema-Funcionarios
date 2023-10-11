@@ -22,3 +22,15 @@ void freeFuncionario(Funcionario *emploeey) {
     free(emploeey);
 }
 
+void printFuncionario(Funcionario *emploeey) {
+    printf("-----------------------------------------------------\n");
+    printf("Nome: %s\n Idade: %.02d\n", emploeey ->nome, emploeey ->idade);
+}
+
+void updateNameFuncionario(Funcionario *emploeey, char name[30]) {
+    strcpy(emploeey ->nome, name);
+}
+
+void updateAgeFuncionario(Funcionario *emploeey, int age) {
+    emploeey ->idade = age;
+}

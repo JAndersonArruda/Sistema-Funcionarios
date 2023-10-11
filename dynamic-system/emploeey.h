@@ -12,10 +12,10 @@ Funcionario *createFuncionario(char name[30], int age);
 void freeFuncionario(Funcionario *emploeey);
 
 /* Procedimento printFuncionario - Imprime um funcionario */
-void printFuncionario(char name[30]);
+void printFuncionario(Funcionario *emploeey);
 
 /* Procedimento updateNameFuncioanrio - Atulaiza o nome do funcionario */
-void updateNameFuncionario(char name[30]);
+void updateNameFuncionario(Funcionario *emploeey, char name[30]);
 
 /* Procedimento updateAgeFuncionario - Atualiza a idade do funcionario */
-void updateAgeFuncionario(char name[30]);
+void updateAgeFuncionario(Funcionario *emploeey, int age);

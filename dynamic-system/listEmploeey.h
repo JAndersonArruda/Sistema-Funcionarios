@@ -11,7 +11,7 @@ typedef struct lista Lista;
 /* Função criarLista - criar uma lista de funcionarios vazia */
 Lista *criarLista();
 
-/* Procedimento addFuncionario - Adiciona um funcionario a lista */
+/* Procedimento addFuncionario - Adiciona um funcionario a lista de forma ordenada crescente por nome */
 void addFuncionario(Lista *list, char name[30], int age);
 
 /* Função voidLista - Retorna 0, para lsita vazia, ou 1, para lista não vazia */

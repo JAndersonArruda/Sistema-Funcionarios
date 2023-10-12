@@ -18,20 +18,40 @@ typedef struct lista Lista;
 
 
 Lista *criarLista() {
-    Lista *new = (Lista *)malloc(sizeof(Lista));
-    new ->start == NULL;
-    return new;
+    Lista *list = (Lista *)malloc(sizeof(Lista));
+    list ->start == NULL;
+    return list;
 }
 
 void addFuncionario(Lista *list, char name[30], int age) {
     Nodo *new = (Nodo *)malloc(sizeof(Nodo));
+    new ->emploeey = createFuncionario(name, age);
+    new ->next = NULL;
 
     if (list ->start == NULL) {
-        new ->emploeey = createFuncionario(name, age);
-        new ->next = NULL;
-        list ->start = new ->emploeey;
+        list ->start = new;
     }
     else {
+        Nodo *aux = list ->start;
+        Nodo *temp = NULL;
+        int comp = strcmp(name, new ->emploeey ->nome);
 
+        while (comp > 0 && aux ->next != NULL) {
+            temp = aux;
+            aux = aux ->next;
+            comp = strcmp(name, new ->emploeey ->nome);
+        }
+
+        if (comp > 0) {
+            aux ->next = new;
+        }
+        else if (list ->start == aux) {
+            new ->next = aux;
+            list ->start = new;
+        }
+        else {
+            new ->next = aux;
+            temp ->next = new;
+        }      
     }
 }

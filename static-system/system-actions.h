@@ -2,20 +2,42 @@
 #include <stdlib.h>
 #include <string.h>
 
+int TAMANHO = 2;
 
 typedef struct {
-    char nome[60];
-    char idade[5];
-    char cpf[15];
+    char nome[50];
+    int idade;
+    int cpf;
     char endereco[100];
-    char salario[15];
+    float salario;
 } Funcionario;
 
-FILE *openFIle(char nome[25], char mode[5]) {
-    FILE * file;
+FILE *openFile(char nome[50], char mode[5]) {
+    FILE *file;
     file = fopen(nome, mode);
+    if (!file) {
+        printf("Impossível abrir arquivo\n");
+        return NULL;
+    }
 
     return file;
+}
+
+int contarLinhasCSV(char fileName[50]) {
+    int linhas = 0;
+    char linha[1024];
+
+    FILE* file = fopen(fileName, "r");
+	if (!file){
+		return 0;
+	}
+    
+    while (fgets(linha, sizeof(linha), file) != NULL) {
+        linhas++;
+    }
+
+    fclose(file);
+    return linhas;
 }
 
 void closeFile(FILE *file) {
@@ -25,113 +47,199 @@ void closeFile(FILE *file) {
 int menu() {
     int acao;
     
-    //Nova opcao de criar arquivo adicionada
     printf("\n\t------------ Menu ------------- \n\n");
-    printf("\t   [1] Criar novo arquivo\n");
-    printf("\t   [2] Cadastrar Funcionario (em arquivo existente)\n");
-    printf("\t   [3] Atualizar Dados\n");
-    printf("\t   [4] Buscar Funcionario\n");
-    printf("\t   [5] Ler\n");
-    printf("\t   [6] Remover Funcionario\n");
-    printf("\t   [7] Encerrar sessão\n\n");
+    printf("\t   [1] Cadastrar Funcionario\n");
+    printf("\t   [2] Atualizar Dados\n");
+    printf("\t   [3] Buscar Funcionario\n");
+    printf("\t   [4] Ler\n");
+    printf("\t   [5] Remover Funcionario\n");
+    printf("\t   [6] Encerrar sessão\n\n");
     printf("\t------------------------------- \n\n");
 
-	scanf ("%d", &acao);
-
     printf("system log: Por favor digite o indice da operação que deseja realizar: ");
-    
+    scanf("%d", &acao);
+
     return acao;
 }
 
+void inputEmployeeData(Funcionario *funcionario) {
+    fflush(stdin);
+    printf("Nome: ");
+    scanf("%s", &funcionario->nome);
+    fflush(stdin);
+    printf("Idade: ");
+    scanf("%d", &funcionario->idade);
+    fflush(stdin);
+    printf("CPF: ");
+    scanf("%d", &funcionario->cpf);
+    fflush(stdin);
+    printf("Endereço: ");
+    scanf("%s", &funcionario->endereco);
+    fflush(stdin);
+    printf("Salário: ");
+    scanf("%f", &funcionario->salario);
+    fflush(stdin);
+}
 
-void createEmployee(Funcionario funcionarios[3], int idx, char name[50], char age[5], char cpf[25], char address[100], char salary[15], char fileName[25]) {
-	//Seguest�o de mudan�a ---
+void createEmployee(Funcionario *funcionarios[TAMANHO], int idx) {
     Funcionario *funcionario = (Funcionario *)malloc(sizeof(Funcionario));
-    
-    FILE * myFile = openFIle(fileName, "a");
-    
-    if (myFile == NULL) {
-    	printf ("Arquivo nao encotrado\n");
-	}
-	else{
-		
-	    //Adicionado o funcion�rio em um documento
-        strcpy(funcionario->nome, name);
-        fputs(funcionario -> nome, myFile);
-        
-        strcpy(funcionario->idade, age);
-        fputs(funcionario -> idade, myFile);
-        
-        strcpy(funcionario->cpf, cpf);
-        fputs(funcionario -> cpf, myFile);
-        
-        strcpy(funcionario->endereco, address);
-        fputs(funcionario ->endereco, myFile);
-        
-        strcpy(funcionario->salario, salary);
-        fputs(funcionario ->salario, myFile);
 
+    printf("\n---------- Cadastre-se! ----------\n");
+    printf("system log: preencha os campos necessarios para o cadastro...\n");
 
-        printf("Index: %d", idx);
+    inputEmployeeData(funcionario);
+
+    funcionarios[idx] = funcionario;
+}
+
+Funcionario *buscarFuncionarios(char fileName[50]) {
+    FILE *file = openFile(fileName, "r");
+
+    if (!file) {
+        return NULL;
+    }
+
+    int numFuncionarios = contarLinhasCSV(fileName);
+    
+    Funcionario *funcionarios = (Funcionario*)malloc(numFuncionarios * sizeof(Funcionario));
+
+    char linha[1024];
+    char* token;
+    int idx = 0;
+
+    // Leia cada linha do arquivo
+    while (fgets(linha, sizeof(linha), file) != NULL && idx < numFuncionarios) {
+        Funcionario *funcionario = (Funcionario*)malloc(sizeof(Funcionario)); // Crie uma variável Funcionario para armazenar os dados
+
+        // Use strtok para dividir a linha em tokens separados por vírgulas
+        token = strtok(linha, ",");
+        int campo = 0;
+
+        while (token != NULL && campo < 5) {
+            switch (campo) {
+                case 0:
+                    strncpy(funcionario->nome, token, sizeof(funcionario->nome));
+                    break;
+                case 1:
+                    funcionario->idade = atoi(token);
+                    break;
+                case 2:
+                    funcionario->cpf = atoi(token);
+                    break;
+                case 3:
+                    strncpy(funcionario->endereco, token, sizeof(funcionario->endereco));
+                    break;
+                case 4:
+                    funcionario->salario = atof(token);
+                    break;
+            }
+
+            token = strtok(NULL, ",");
+            campo++;
+        }
         funcionarios[idx] = *funcionario;
-		
-	}
-	
-	fclose(myFile);
+        idx++;
+    }
+
+    // Feche o arquivo
+    return funcionarios;
+}
+
+Funcionario buscarFuncionario(char fileName[50], int cpf) {
+    int numFuncionarios = contarLinhasCSV(fileName);
+    Funcionario *funcionarios = buscarFuncionarios(fileName);
+    for (int fun = 0; fun < numFuncionarios; fun++){
+        if (funcionarios[fun].cpf == cpf){
+            return(funcionarios[fun]);
+        }
+    }
+
+}
+
+void updateEmployee(char fileName[50], int cpf) {
+    printf("\n---------- Atualize-se! ----------\n");
+    printf("system log: preencha os campos necessarios para a atualização...\n");
+
+    Funcionario funcionario = buscarFuncionario(fileName, cpf);
+    inputEmployeeData(&funcionario);
     
+    int encontrou = 0;
+    
+    int numFuncionarios = contarLinhasCSV("funcionarios.csv");
+    Funcionario *funcionarios = buscarFuncionarios("funcionarios.csv");
+    for (int fun = 0; fun < numFuncionarios; fun++){
+        if (funcionarios[fun].cpf == cpf){
+            funcionarios[fun] = funcionario;
+            encontrou = 1;
+        }
+    }
+
+    if (encontrou) {
+        writeFileArray(funcionarios, "funcionarios.csv", numFuncionarios);
+        printf("Funcionário com CPF %d atualizado com sucesso!\n", cpf);
+    } else {
+        printf("Funcionário não encontrado!\n");
+    }
 }
 
-//Recebe o nome do arquivo desejado (caso esteja em pasta diferente, enviar o caminho do arquivo), imprime todo o arquivo
-void readEmployee(char fileName[50]){
-	
-	//Vetor de strings para melhor compreencao na exibicao do arquivo
-	
-	char titles[5][10];
-	strcpy(titles[0], "Nome: ");
-	strcpy(titles[1], "Idade: ");
-	strcpy(titles[2], "CPF: ");
-	strcpy(titles[3], "Endereco : ");
-	strcpy(titles[4], "Salario : ");
+void deleteEmployee(char fileName[50], int cpf) {
+    int numFuncionarios = contarLinhasCSV(fileName);
+    Funcionario *funcionarios = buscarFuncionarios(fileName);
 
-	
-	FILE * file = fopen(fileName, "r");
-	if (!file){
-		printf ("Imposs�vel abrir arquivo");
-	}
-	
-	char buffer[1000];
-	int control = 0;
-	
-	//Melhoria no printf
-	while (fgets(buffer, sizeof(buffer), file) != NULL) {
-		
-		char * token = strtok(buffer, ",");
-		
-		while (token != NULL) {
-			printf ("%s", titles[control]);
-			control++;
-			printf ("%s\n", token);
-			token = strtok(NULL, ",");
-		}
-		printf("\n\n");
-		fclose(file);
-	}	
+    int encontrou = 0;
+
+    FILE *file = openFile(fileName, "w");
+
+    if (file != NULL) {
+        for (int fun = 0; fun < numFuncionarios; fun++) {
+            if (funcionarios[fun].cpf == cpf) {
+                encontrou = 1; 
+            } else {
+                fprintf(file, "%s, %d, %d, %s, %.2f\n",
+                        funcionarios[fun].nome,
+                        funcionarios[fun].idade,
+                        funcionarios[fun].cpf,
+                        funcionarios[fun].endereco,
+                        funcionarios[fun].salario);
+            }
+        }
+
+        if (encontrou) {
+            printf("Funcionário com CPF %d removido com sucesso!\n", cpf);
+        } else {
+            printf("Funcionário não encontrado!\n");
+        }
+
+        closeFile(file);
+    } else {
+        printf("Erro ao abrir o arquivo para remoção.\n");
+    }
 }
 
-void writeFile(Funcionario funcionarios[3] , char nome[25]) {
-	
-    FILE * file = openFIle(nome, "r");
-	
-	//Ajuste devido a minha versao do C
-	int c;
+void writeFile(Funcionario *funcionarios[TAMANHO], char nome[50], int idx) {
+    printf("%d", idx);
+    FILE *file = openFile(nome, "a");
 
-    for (c = 0; c < 3; c++){
-        fprintf(file, "%s, %d, %s, %s, %.2f\n",
-                funcionarios[c].nome,
-                funcionarios[c].idade,
-                funcionarios[c].cpf,
-                funcionarios[c].endereco,
-                funcionarios[c].salario);
+    fprintf(file, "%s, %d, %d, %s, %.2f\n",
+            funcionarios[idx]->nome,
+            funcionarios[idx]->idade,
+            funcionarios[idx]->cpf,
+            funcionarios[idx]->endereco,
+            funcionarios[idx]->salario);
+
+    closeFile(file);
+}
+
+void writeFileArray(Funcionario funcionarios[TAMANHO], char nome[50], int idx) {
+    FILE *file = openFile(nome, "w");
+
+    for (int fun = 0; fun < idx; fun++){
+        fprintf(file, "%s, %d, %d, %s, %.2f\n",
+            funcionarios[fun].nome,
+            funcionarios[fun].idade,
+            funcionarios[fun].cpf,
+            funcionarios[fun].endereco,
+            funcionarios[fun].salario);
     }
 
     closeFile(file);

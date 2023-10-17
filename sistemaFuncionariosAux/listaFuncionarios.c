@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #include "listaFuncionarios.h"
 #include "funcionario.h"
@@ -16,14 +17,16 @@ Lista *criarLista()
 }
 
 /* Procedimento que adiciona um novo funcionário à lista */
-void adicionarFuncionario(Lista *lista, char nome[30], char idade[5], char cpf[15])
+void adicionarFuncionario(Lista *lista, char nome[30], char idade[5], char cpf[15], char matricula[10])
 {
     Nodo *novo = (Nodo *)malloc(sizeof(Nodo));
     novo->meuFuncionario = (Funcionario *)malloc(sizeof(Funcionario));
+    
 
     strcpy(novo->meuFuncionario->nome, nome);
     strcpy(novo->meuFuncionario->idade, idade);
     strcpy(novo->meuFuncionario->cpf, cpf);
+    strcpy(novo->meuFuncionario->matricula, matricula);
 
     novo->proximo = NULL;
     novo->anterior = NULL;
@@ -53,7 +56,8 @@ void exibirUmFuncionario(Nodo *nodo)
     printf("Nome: %s\n", nodo->meuFuncionario->nome);
     printf("Idade: %s\n", nodo->meuFuncionario->idade);
     printf("CPF: %s\n", nodo->meuFuncionario->cpf);
-    printf("========================\n\n");
+    printf("Matricula: %s", nodo->meuFuncionario->matricula);
+    printf("========================\n");
 }
 
 /* Procedimento que imprime uma lista */
@@ -185,4 +189,14 @@ void editarFuncionario(Lista *lista, char nome[30])
     {
         printf("Funcinario informado nao existe na lista\n");
     }
+}
+
+/*Procedimento que gera um numero de matricula*/
+void gerarMatricula(char matricula[10]){
+    srand(time(NULL));
+
+    int novaMatricula = rand()%(9999 - 1000+1) + (1000);
+    /*Copiar um inteiro em uma string*/
+    sprintf(matricula, "%d", novaMatricula);
+    strcat(matricula, ",\n");
 }

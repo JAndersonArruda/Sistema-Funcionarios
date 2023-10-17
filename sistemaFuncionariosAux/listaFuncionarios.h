@@ -16,7 +16,7 @@ typedef struct Lista
 Lista *criarLista();
 
 /* Procedimento que adiciona um novo funcionário na lista */
-void adicionarFuncionario(Lista *lista, char nome[], char idade[], char cpf[]);
+void adicionarFuncionario(Lista *lista, char nome[], char idade[], char cpf[], char matriucla[]);
 
 /* Procedimento que imprime toda a lista */
 void imprimirLista(Lista *lista);
@@ -32,5 +32,8 @@ void excluirFuncionario(Lista *lista, char nome[]);
 
 /*Procedimento que edita um funcionário*/
 void editarFuncionario(Lista *lista, char nome[30]);
+
+/*Funcao que retorna uma string com o numero da matricula do funcionario*/
+void gerarMatricula(char matricula[]);
 
 #endif

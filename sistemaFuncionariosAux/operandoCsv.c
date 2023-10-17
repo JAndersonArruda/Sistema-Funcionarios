@@ -40,6 +40,7 @@ void atualizarListaTxt(Lista *lista)
         fputs(aux->meuFuncionario->nome, arquivo->documento);
         fputs(aux->meuFuncionario->idade, arquivo->documento);
         fputs(aux->meuFuncionario->cpf, arquivo->documento);
+        fputs(aux->meuFuncionario->matricula, arquivo->documento);
 
         aux = aux->proximo;
     }

@@ -9,7 +9,7 @@
 void menu(Lista *lista)
 {
     int opcao;
-    char nome[30], idade[8], cpf[23];
+    char nome[30], idade[8], cpf[23], matricula[10];
 
     do
     {
@@ -45,7 +45,9 @@ void menu(Lista *lista)
             strcat(cpf, ", ");
             fflush(stdin);
 
-            adicionarFuncionario(lista, nome, idade, cpf);
+            gerarMatricula(matricula);
+
+            adicionarFuncionario(lista, nome, idade, cpf, matricula);
             printf("\nOperacao realizada com sucesso!\n");
 
             break;

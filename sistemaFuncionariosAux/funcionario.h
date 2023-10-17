@@ -7,6 +7,7 @@ typedef struct Funcionario
     char nome[30];
     char idade[8];
     char cpf[23];
+    char matricula[10];
 } Funcionario;
 
 /* Estrutura do meu nodo */

@@ -39,19 +39,14 @@ void main() {
                 scanf("%d", &cpf);
                 Funcionario funcionario = buscarFuncionario("funcionarios.csv", cpf);
                 if (funcionario.cpf != -1){
-                    printf("\n\nBuscou: %s | %d", funcionario.nome, funcionario.cpf);
+                    printEmployee(funcionario);
                 }
                 break;
             case 4:
                 int numFuncionarios = contarLinhasCSV("funcionarios.csv");
                 Funcionario *funcionarios = buscarFuncionarios("funcionarios.csv");
                 for (int fun = 0; fun < numFuncionarios; fun++){
-                    printf("======================================\n");
-                    printf("Nome: %s\n", funcionarios[fun].nome);
-                    printf("Idade: %d\n", funcionarios[fun].idade);
-                    printf("CPF: %d\n", funcionarios[fun].cpf);
-                    printf("Endereço: %s\n", funcionarios[fun].endereco);
-                    printf("Salário: %.2f\n", funcionarios[fun].salario);
+                    printEmployee(funcionarios[fun]);
                 }
                 break;
             case 5:

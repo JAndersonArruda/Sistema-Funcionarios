@@ -244,3 +244,12 @@ void writeFileArray(Funcionario funcionarios[TAMANHO], char nome[50], int idx) {
 
     closeFile(file);
 }
+
+void printEmployee(Funcionario funcionario) {
+    printf("======================================\n");
+    printf("Nome: %s\n", funcionario.nome);
+    printf("Idade: %d\n", funcionario.idade);
+    printf("CPF: %d\n", funcionario.cpf);
+    printf("Endereço: %s\n", funcionario.endereco);
+    printf("Salário: %.2f\n", funcionario.salario);
+}

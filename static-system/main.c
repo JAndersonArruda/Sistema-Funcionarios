@@ -46,7 +46,12 @@ void main() {
                 int numFuncionarios = contarLinhasCSV("funcionarios.csv");
                 Funcionario *funcionarios = buscarFuncionarios("funcionarios.csv");
                 for (int fun = 0; fun < numFuncionarios; fun++){
-                    printf("\n%s | %d", funcionarios[fun].nome, funcionarios[fun].cpf);
+                    printf("======================================\n");
+                    printf("Nome: %s\n", funcionarios[fun].nome);
+                    printf("Idade: %d\n", funcionarios[fun].idade);
+                    printf("CPF: %d\n", funcionarios[fun].cpf);
+                    printf("Endereço: %s\n", funcionarios[fun].endereco);
+                    printf("Salário: %.2f\n", funcionarios[fun].salario);
                 }
                 break;
             case 5:

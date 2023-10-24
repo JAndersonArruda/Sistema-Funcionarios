@@ -46,3 +46,13 @@ int pop(Pilha *pilha) {
         return -1;  // Valor de erro
     }
 }
+
+void liberarPilha(Pilha *pilha) {
+    Nodo *atual = pilha->topo;
+    while (atual != NULL) {
+        Nodo *aux = atual;
+        atual = atual->prox;
+        free(aux);
+    }
+    free(pilha);
+}

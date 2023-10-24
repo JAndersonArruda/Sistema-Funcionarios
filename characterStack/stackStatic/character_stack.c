@@ -45,3 +45,29 @@ char pop(Pilha *pilha) {
         return '\0';
     }
 }
+
+int estaBalanceada(char *expressao) {
+    Pilha *pilha = criarPilha();
+    int i = 0;
+    char *charAbertura = "({[";
+    char *charFechamento = ")}]";
+
+    while (expressao[i] != '\0') {
+        char c = expressao[i];
+
+        if (strchr(charAbertura, expressao[i])) {
+            push(pilha, expressao[i]);
+        } else if (strchr(charFechamento, expressao[i])) {
+            if (estaVazia(pilha)) {
+                return 0;
+            }
+            char topo = pop(pilha);
+            if ((c == ')' && topo != '(') || (c == ']' && topo != '[') || (c == '}' && topo != '{')) {
+                return 0;
+            }
+        }
+        i++;
+    }
+
+    return estaVazia(pilha);
+}

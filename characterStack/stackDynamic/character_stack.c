@@ -18,3 +18,7 @@ Pilha *criarPilha() {
     }
     return pilha;
 }
+
+int estaVazia(Pilha *pilha) {
+    return pilha->topo == NULL;
+}

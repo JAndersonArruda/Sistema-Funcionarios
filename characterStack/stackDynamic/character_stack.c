@@ -22,3 +22,15 @@ Pilha *criarPilha() {
 int estaVazia(Pilha *pilha) {
     return pilha->topo == NULL;
 }
+
+void push(Pilha *pilha, char valor) {
+    Nodo *novoNodo = (Nodo *)malloc(sizeof(Nodo));
+    if (novoNodo != NULL) {
+        novoNodo->simbolo = valor;
+        novoNodo->prox = pilha->topo;
+        pilha->topo = novoNodo;
+    } else {
+        printf("Erro: Falha na alocação de memória.\n");
+    }
+}
+

@@ -9,3 +9,11 @@ typedef struct pilha {
     char simbolos[TAMANHO_MAXIMO];
     int topo;
 } Pilha;
+
+Pilha *criarPilha() {
+    Pilha *pilha = (Pilha *)malloc(sizeof(Pilha));
+    if (pilha != NULL) {
+        pilha->topo = -1;
+    }
+    return pilha;
+}

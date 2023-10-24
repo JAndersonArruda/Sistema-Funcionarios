@@ -34,3 +34,15 @@ void push(Pilha *pilha, char valor) {
     }
 }
 
+int pop(Pilha *pilha) {
+    if (!estaVazia(pilha)) {
+        Nodo *aux = pilha->topo;
+        int value = aux->simbolo;
+        pilha->topo = aux->prox;
+        free(aux);
+        return value;
+    } else {
+        printf("Erro: A pilha está vazia.\n");
+        return -1;  // Valor de erro
+    }
+}

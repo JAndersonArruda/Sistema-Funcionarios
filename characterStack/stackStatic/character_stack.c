@@ -17,3 +17,11 @@ Pilha *criarPilha() {
     }
     return pilha;
 }
+
+int estaVazia(Pilha *pilha) {
+    return pilha->topo == -1;
+}
+
+int estaCheia(Pilha *pilha) {
+    return pilha->topo == TAMANHO_MAXIMO - 1;
+}

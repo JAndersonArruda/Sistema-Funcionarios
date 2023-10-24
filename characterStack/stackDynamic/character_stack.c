@@ -11,4 +11,10 @@ typedef struct pilha {
     Nodo *topo;
 } Pilha;
 
-
+Pilha *criarPilha() {
+    Pilha *pilha = (Pilha *)malloc(sizeof(Pilha));
+    if (pilha != NULL) {
+        pilha->topo = NULL;
+    }
+    return pilha;
+}

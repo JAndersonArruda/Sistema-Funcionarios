@@ -25,3 +25,12 @@ int estaVazia(Pilha *pilha) {
 int estaCheia(Pilha *pilha) {
     return pilha->topo == TAMANHO_MAXIMO - 1;
 }
+
+void push(Pilha *pilha, char valor) {
+    if (!estaCheia(pilha)) {
+        pilha->topo++;
+        pilha->simbolos[pilha->topo] = valor;
+    } else {
+        printf("Erro: A pilha está cheia.\n");
+    }
+}

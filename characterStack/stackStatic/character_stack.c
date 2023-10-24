@@ -34,3 +34,14 @@ void push(Pilha *pilha, char valor) {
         printf("Erro: A pilha está cheia.\n");
     }
 }
+
+char pop(Pilha *pilha) {
+    if (!estaVazia(pilha)) {
+        char valor = pilha->simbolos[pilha->topo];
+        pilha->topo--;
+        return valor;
+    } else {
+        printf("Erro: A pilha está vazia.\n");
+        return '\0';
+    }
+}

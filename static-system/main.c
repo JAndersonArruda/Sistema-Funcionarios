@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "system-actions.h"
 
 int cpf;
@@ -7,7 +8,7 @@ int cpf;
 void main() {
     Funcionario *funcionarios[TAMANHO];
 
-    int idxFuncionario = 0;
+    int idxFuncionario = 0; 
     int acao;
 
     printf("\n ---------- Sistema de Funcionarios ---------- \n\n");

@@ -19,7 +19,33 @@ da fila circular ;
 /*Variaveis de controle globais*/
 const int MAX = 10;
 int inicio = 0, fim = -1, quantidade = 0, aux = 0, repeticao = 0;
-;
+
+void menu()
+{
+    funcionario *fila = criarFilaCircular();
+
+    int prioridade = 0, continuar = 0;
+    char nome[10];
+    printf("A fila segue a ordem de prioridade: 1 (Diretor), 2 (Coordenador) e 3 (Funcionario), informe seu nome e o numero de sua prioridade, apos isso sera adicionado na fila, conforme ela for enchendo as impressoes (com base na ordem) serao realizadas e informadas, no fim da execucao, voce confere o estado final da fila. \n\n");
+
+    do
+    {
+        printf("Informe seu primeiro nome: \n");
+        gets(nome);
+
+        printf("Agora, digite o numero de sua prioridade: \n");
+        scanf("%d", &prioridade);
+
+        inserirElemento(fila, nome, prioridade);
+
+        printf("Deseja encerrar (0), continuar (1)\n");
+        scanf("%d", &continuar);
+        fflush(stdin);
+
+    } while (continuar != 0);
+
+    exibir(fila);
+}
 
 /*Procedimento que zera uma fila*/
 void destruirFilaCircular(funcionario *fila)
@@ -73,6 +99,8 @@ void inserirElemento(funcionario *fila, char nome[10], int prioridade)
     fila[indice].prioridade = prioridade;
     strcpy(fila[indice].nome, nome);
     quantidade++;
+
+    printf("Impressao na fila \n\n");
 }
 
 /*Retorna o indice da fuila que um valor deve entrar*/
@@ -174,19 +202,23 @@ int controlarEntrada(funcionario *fila, int prioridade)
 }
 
 /*Exibir estado atual*/
-void exibirEstado(int *fila)
+void exibirEstado(funcionario *fila)
 {
-    printf("Sequencia da fila no termino da execucao: \n");
-    for (int controle = 0; controle < MAX; controle++)
+    printf("\nSequencia da fila no termino da execucao: \n");
+    for (int cont = 0; cont < MAX; cont++)
     {
-        printf("%d \n", fila[controle]);
+        printf("ID na fila = %d \n", cont);
+        printf("Nome = %s \n", fila[cont].nome);
+        printf("Prioridade = %d \n\n", fila[cont].prioridade);
     }
 }
 
-void exibir()
+void exibir(funcionario *fila)
 {
+    exibirEstado(fila);
+
     printf("Inicio atual da fila = %d\n", inicio);
     printf("Fim atual da fila = %d\n", fim);
-    printf("Quantidade atual = %d\n", quantidade);
+    printf("Quantidade atual na fila = %d\n", quantidade);
     printf("Impressoes totais = %d\n\n", aux);
 }

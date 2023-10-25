@@ -35,7 +35,7 @@ void permutarValores(funcionario * fila, int p1, int p2);
 int controlarEntrada(funcionario *fila, int element);
 
 /*Exibir estado atual*/
-void exibirEstado(int *fila);
+void exibirEstado(funcionario *fila);
 
 void exibir();
 

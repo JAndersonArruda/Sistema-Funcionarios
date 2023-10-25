@@ -7,12 +7,11 @@
 /*VARIÁVEL EXTERNA TEM QUE SER DECLARADA NO .C QUE SERÁ UTILIZADA*/
 int TAMANHO = 10;
 
+int fun; 
+
 /*Não é possível declara o FILE diretamente no arquivo .h, então criei a seguinte solção:
 ------------*/
-typedef struct file
-{
-    FILE *meuArquivo;
-}file;
+
 
 /*O ponteiro meuArquivo substitui o arquivo direto, E RETORNA O MESMO, UM PONTEIRO PARA FILE*/
 FILE *openFile(char nome[50], char mode[5]) {
@@ -110,11 +109,10 @@ Funcionario *buscarFuncionarios(char fileName[50]) {
     char* token;
     int idx = 0;
 
-    // Leia cada linha do arquivo
-    while (fgets(linha, sizeof(linha), file) != NULL && idx < numFuncionarios) {
-        Funcionario *funcionario = (Funcionario*)malloc(sizeof(Funcionario)); // Crie uma variável Funcionario para armazenar os dados
 
-        // Use strtok para dividir a linha em tokens separados por vírgulas
+    while (fgets(linha, sizeof(linha), file) != NULL && idx < numFuncionarios) {
+        Funcionario *funcionario = (Funcionario*)malloc(sizeof(Funcionario)); 
+       
         token = strtok(linha, ",");
         int campo = 0;
 
@@ -144,14 +142,14 @@ Funcionario *buscarFuncionarios(char fileName[50]) {
         idx++;
     }
 
-    // Feche o arquivo
+    
     return funcionarios;
 }
 
 Funcionario buscarFuncionario(char fileName[50], int cpf) {
     int numFuncionarios = contarLinhasCSV(fileName);
     Funcionario *funcionarios = buscarFuncionarios(fileName);
-    for (int fun = 0; fun < numFuncionarios; fun++){
+    for (fun = 0; fun < numFuncionarios; fun++){
         if (funcionarios[fun].cpf == cpf){
             return(funcionarios[fun]);
         }
@@ -170,7 +168,7 @@ void updateEmployee(char fileName[50], int cpf) {
     
     int numFuncionarios = contarLinhasCSV("funcionarios.csv");
     Funcionario *funcionarios = buscarFuncionarios("funcionarios.csv");
-    for (int fun = 0; fun < numFuncionarios; fun++){
+    for (fun = 0; fun < numFuncionarios; fun++){
         if (funcionarios[fun].cpf == cpf){
             funcionarios[fun] = funcionario;
             encontrou = 1;
@@ -194,7 +192,7 @@ void deleteEmployee(char fileName[50], int cpf) {
     FILE *file = openFile(fileName, "w");
 
     if (file != NULL) {
-        for (int fun = 0; fun < numFuncionarios; fun++) {
+        for (fun = 0; fun < numFuncionarios; fun++) {
             if (funcionarios[fun].cpf == cpf) {
                 encontrou = 1; 
             } else {
@@ -236,7 +234,7 @@ void writeFile(Funcionario *funcionarios[TAMANHO], char nome[50], int idx) {
 void writeFileArray(Funcionario funcionarios[TAMANHO], char nome[50], int idx) {
     FILE *file = openFile(nome, "w");
 
-    for (int fun = 0; fun < idx; fun++){
+    for (fun = 0; fun < idx; fun++){
         fprintf(file, "%s, %d, %d, %s, %.2f\n",
             funcionarios[fun].nome,
             funcionarios[fun].idade,

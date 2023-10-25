@@ -3,11 +3,12 @@
 
 #include "systemActions.h"
 
-void main() {
+int TAMANHO = 10;
+
+int main() {
     int cpf;
 
     /*VARIÁVEL EXTERNA TEM QUE SER DECLARADA NO .C QUE SERÁ UTILIZADA*/
-    int TAMANHO = 10;
 
     Funcionario *funcionarios[TAMANHO];
 
@@ -51,7 +52,8 @@ void main() {
             case 4:
                 numFuncionarios = contarLinhasCSV("funcionarios.csv");
                 Funcionario *funcionarios = buscarFuncionarios("funcionarios.csv");
-                for (int fun = 0; fun < numFuncionarios; fun++){
+                int fun;
+                for (fun = 0; fun < numFuncionarios; fun++){
                     printEmployee(funcionarios[fun]);
                 }
                 break;
@@ -63,15 +65,12 @@ void main() {
                 deleteEmployee("funcionarios.csv", cpf);
                 getchar();
                 break;
-            case 6:
-                continue;
             default:
                 printf("\nsystem log: Informe uma ação valida!\n\n");
                 getchar();
-                break;
         }
     } while (acao != 6);
     
     printf("\nsystem log: Sistema Encerrado! \n");
-    getchar();
+    return 0;
 }

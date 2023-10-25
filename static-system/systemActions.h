@@ -7,9 +7,9 @@
 /*USAR DIRETIVAS DE PRÉ-PROCESSAMENTO (ifndef, define e endif)*/
 
 /*ERRO NA DECLARAÇÃO, NÃO PODE DECLARAR VALORES NO .H, E FALTOU O EXTERN*/
-extern int TAMANHO;
 
-extern int minhaVariavelExterna;
+#include <stdio.h>
+
 
 /* COnstrução da estrutura */
 typedef struct funcionario{
@@ -24,11 +24,14 @@ typedef struct funcionario{
 /* Definindo estrutura funcionario */
 typedef struct funcionario Funcionario;
 
+/*NOVA FORMA DE ABRIR */
+typedef struct file
+{
+    FILE *meuArquivo;
+}file;
+
 /* Abrir o Arquivo */
 FILE *openFile(char nome[50], char mode[5]);
-
-/*NOVA FORMA DE ABRIR */
-typedef struct file file;
 
 /* Rotula as linhas no arquivo*/
 int contarLinhasCSV(char fileName[50]);

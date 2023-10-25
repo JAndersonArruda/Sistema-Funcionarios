@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 FILE *openFile(char *nome, char *mode) {
     FILE *file;
     file = fopen(nome, mode);
@@ -141,7 +142,8 @@ Funcionario *buscarFuncionarios(char *fileName) {
 Funcionario buscarFuncionario(char fileName[50], int cpf) {
     int numFuncionarios = contarLinhasCSV(fileName);
     Funcionario *funcionarios = buscarFuncionarios(fileName);
-    for (int fun = 0; fun < numFuncionarios; fun++){
+    int fun;
+    for (fun = 0; fun < numFuncionarios; fun++){
         if (funcionarios[fun].cpf == cpf){
             return(funcionarios[fun]);
         }
@@ -161,10 +163,11 @@ void updateEmployee(char *fileName, int cpf) {
         inputEmployeeData(&funcionario);
         
         int encontrou = 0;
+        int fun;
         
         int numFuncionarios = contarLinhasCSV("funcionarios.csv");
         Funcionario *funcionarios = buscarFuncionarios("funcionarios.csv");
-        for (int fun = 0; fun < numFuncionarios; fun++){
+        for (fun = 0; fun < numFuncionarios; fun++){
             if (funcionarios[fun].cpf == cpf){
                 funcionarios[fun] = funcionario;
                 encontrou = 1;
@@ -189,7 +192,8 @@ void deleteEmployee(char *fileName, int cpf) {
     FILE *file = openFile(fileName, "w");
 
     if (file != NULL) {
-        for (int fun = 0; fun < numFuncionarios; fun++) {
+    	int fun;
+        for (fun = 0; fun < numFuncionarios; fun++) {
             if (funcionarios[fun].cpf == cpf) {
                 encontrou = 1; 
             } else {
@@ -230,8 +234,9 @@ void writeFile(Funcionario *funcionarios[TAMANHO], char *nome, int idx) {
 
 void writeFileArray(Funcionario funcionarios[TAMANHO], char *nome, int idx) {
     FILE *file = openFile(nome, "w");
-
-    for (int fun = 0; fun < idx; fun++){
+	int fun;
+	
+    for (fun = 0; fun < idx; fun++){
         fprintf(file, "%s, %d, %d, %s, %.2f\n",
             funcionarios[fun].nome,
             funcionarios[fun].idade,

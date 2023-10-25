@@ -1,14 +1,14 @@
 #include "system-actions.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 
 void main() {
     Funcionario *funcionarios[TAMANHO];
+    int numFuncionarios;
     int idxFuncionario = 0;
     int acao;
     int cpf;
-
+    	
+	
     printf("\n ---------- Sistema de Funcionarios ---------- \n\n");
     do {
         acao = menu();
@@ -44,9 +44,10 @@ void main() {
                 }
                 break;
             case 4:
-                int numFuncionarios = contarLinhasCSV("funcionarios.csv");
+                numFuncionarios = contarLinhasCSV("funcionarios.csv");
                 Funcionario *funcionarios = buscarFuncionarios("funcionarios.csv");
-                for (int fun = 0; fun < numFuncionarios; fun++){
+                int fun;
+                for (fun = 0; fun < numFuncionarios; fun++){
                     printEmployee(funcionarios[fun]);
                 }
                 break;
@@ -68,5 +69,6 @@ void main() {
     } while (acao != 6);
     
     printf("\nsystem log: Sistema Encerrado! \n");
-    getchar();
+    
+	getchar();
 }

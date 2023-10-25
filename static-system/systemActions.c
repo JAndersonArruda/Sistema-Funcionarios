@@ -2,25 +2,35 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "system-actions.h"
+#include "systemActions.h"
 
+/*VARIÁVEL EXTERNA TEM QUE SER DECLARADA NO .C QUE SERÁ UTILIZADA*/
+int TAMANHO = 10;
 
+/*Não é possível declara o FILE diretamente no arquivo .h, então criei a seguinte solção:
+------------*/
+typedef struct file
+{
+    FILE *meuArquivo;
+}file;
+
+/*O ponteiro meuArquivo substitui o arquivo direto, E RETORNA O MESMO, UM PONTEIRO PARA FILE*/
 FILE *openFile(char nome[50], char mode[5]) {
-    FILE *file;
-    file = fopen(nome, mode);
+    file *file;
+    file->meuArquivo = fopen(nome, mode);
     if (!file) {
         printf("Impossível abrir arquivo\n");
         return NULL;
     }
 
-    return file;
+    return file->meuArquivo;
 }
 
 int contarLinhasCSV(char fileName[50]) {
     int linhas = 0;
     char linha[1024];
 
-    FILE* file = fopen(fileName, "r");
+    FILE *file = openFile(fileName, "r");
 	if (!file){
 		return 0;
 	}

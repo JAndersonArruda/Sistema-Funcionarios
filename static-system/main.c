@@ -1,11 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "system-actions.h"
-
-int cpf;
+#include "systemActions.h"
 
 void main() {
+    int cpf;
+
+    /*VARIÁVEL EXTERNA TEM QUE SER DECLARADA NO .C QUE SERÁ UTILIZADA*/
+    int TAMANHO = 10;
+
     Funcionario *funcionarios[TAMANHO];
 
     int idxFuncionario = 0; 
@@ -15,6 +18,8 @@ void main() {
     do {
         acao = menu();
 
+        int numFuncionarios;
+
         switch (acao) {
             case 1:
                 if (idxFuncionario <= TAMANHO) {
@@ -22,7 +27,7 @@ void main() {
                         idxFuncionario = 0;
                     }
 
-                    createEmployee(&funcionarios, idxFuncionario);
+                    createEmployee(funcionarios, idxFuncionario);
                     writeFile(funcionarios, "funcionarios.csv", idxFuncionario);
 
                     idxFuncionario++;
@@ -44,7 +49,7 @@ void main() {
                 }
                 break;
             case 4:
-                int numFuncionarios = contarLinhasCSV("funcionarios.csv");
+                numFuncionarios = contarLinhasCSV("funcionarios.csv");
                 Funcionario *funcionarios = buscarFuncionarios("funcionarios.csv");
                 for (int fun = 0; fun < numFuncionarios; fun++){
                     printEmployee(funcionarios[fun]);

@@ -21,7 +21,6 @@ void adicionarFuncionario(Lista *lista, char nome[30], char idade[5], char cpf[1
 {
     Nodo *novo = (Nodo *)malloc(sizeof(Nodo));
     novo->meuFuncionario = (Funcionario *)malloc(sizeof(Funcionario));
-    
 
     strcpy(novo->meuFuncionario->nome, nome);
     strcpy(novo->meuFuncionario->idade, idade);
@@ -57,7 +56,7 @@ void exibirUmFuncionario(Nodo *nodo)
     printf("Idade: %s\n", nodo->meuFuncionario->idade);
     printf("CPF: %s\n", nodo->meuFuncionario->cpf);
     printf("Matricula: %s", nodo->meuFuncionario->matricula);
-    printf("========================\n");
+    printf("========================\n\n");
 }
 
 /* Procedimento que imprime uma lista */
@@ -192,10 +191,11 @@ void editarFuncionario(Lista *lista, char nome[30])
 }
 
 /*Procedimento que gera um numero de matricula*/
-void gerarMatricula(char matricula[10]){
+void gerarMatricula(char matricula[10])
+{
     srand(time(NULL));
 
-    int novaMatricula = rand()%(9999 - 1000+1) + (1000);
+    int novaMatricula = rand() % (9999)*rand()%(9999);
     /*Copiar um inteiro em uma string*/
     sprintf(matricula, "%d", novaMatricula);
     strcat(matricula, ",\n");

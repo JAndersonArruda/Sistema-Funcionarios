@@ -26,8 +26,7 @@ File *operarDocumento(char nome[30], char modo[3])
             return arquivo;
         }
     }
-    return NULL;
-
+ return NULL;
 }
 
 //Atualizando arquivos de texto para o documento listaFun.txt

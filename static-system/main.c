@@ -1,13 +1,14 @@
-#include "system-actions.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "system-actions.h"
 
+int cpf;
 
 void main() {
     Funcionario *funcionarios[TAMANHO];
+
     int idxFuncionario = 0;
     int acao;
-    int cpf;
 
     printf("\n ---------- Sistema de Funcionarios ---------- \n\n");
     do {
@@ -20,7 +21,7 @@ void main() {
                         idxFuncionario = 0;
                     }
 
-                    createEmployee(funcionarios, idxFuncionario);
+                    createEmployee(&funcionarios, idxFuncionario);
                     writeFile(funcionarios, "funcionarios.csv", idxFuncionario);
 
                     idxFuncionario++;
@@ -39,8 +40,6 @@ void main() {
                 Funcionario funcionario = buscarFuncionario("funcionarios.csv", cpf);
                 if (funcionario.cpf != -1){
                     printEmployee(funcionario);
-                } else {
-                    printf("O usuario não foi encontrado!");
                 }
                 break;
             case 4:
